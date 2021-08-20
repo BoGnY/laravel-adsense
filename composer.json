@@ -1,10 +1,15 @@
 {
-    "name": "crypto-technology/laravel-adsense",
-    "description": "Display Adsense ads easily in Laravel.",
+    "name": "martinbutt/laravel-adsense",
+    "description": "Display Adsense ads easily in Laravel 6.x, 7.x and 8.x",
     "keywords": [ "laravel", "adsense", "ads" ],
     "type": "library",
     "license": "MIT",
     "authors": [
+        {
+            "name": "Martin Butt",
+            "homepage": "https://www.martinbutt.com",
+            "role": "Developer"
+        },
         {
             "name": "Crypto Technology srl",
             "email": "admin@cryptotech.srl",
@@ -13,12 +18,12 @@
         }
     ],
     "support": {
-        "issues": "https://github.com/crypto-technology/laravel-adsense/issues",
-        "source": "https://github.com/crypto-technology/laravel-adsense/"
+        "issues": "https://github.com/martinbutt/laravel-adsense/issues",
+        "source": "https://github.com/martinbutt/laravel-adsense/"
     },
     "require": {
-        "php": "^7.2",
-        "illuminate/view": "^6.0"
+        "php": "^7.2||^8.0",
+        "illuminate/view": "^6.0||^7.0||^8.0"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.16",
@@ -27,21 +32,21 @@
     },
     "autoload": {
         "psr-4": {
-            "CryptoTech\\Laravel\\Adsense\\": "src"
+            "MartinButt\\Laravel\\Adsense\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "CryptoTech\\Laravel\\Adsense\\Tests\\": "tests"
+            "MartinButt\\Laravel\\Adsense\\Tests\\": "tests"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "CryptoTech\\Laravel\\Adsense\\Providers\\AdsenseServiceProvider"
+                "MartinButt\\Laravel\\Adsense\\Providers\\AdsenseServiceProvider"
             ],
             "aliases": {
-                "Adsense": "CryptoTech\\Laravel\\Adsense\\Facades\\AdsenseFacade"
+                "Adsense": "MartinButt\\Laravel\\Adsense\\Facades\\AdsenseFacade"
             }
         }
     },

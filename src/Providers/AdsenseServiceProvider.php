@@ -6,13 +6,14 @@
  * Package for easily including Google Adsense Ad units
  * in Laravel and Lumen.
  *
- * @developer Crypto Technology srl <https://cryptotech.srl/>
+ * @developer Martin Butt <https://www.martinbutt.com/>
  *
- * @copyright Copyright (c) 2019 Crypto Technology srl
+ * @copyright Copyright (c) 2021 Martin Butt
  * @license   MIT
  *
  * Copyright (c) 2016 Galen Han
  * Copyright (c) 2019 Crypto Technology srl
+ * Copyright (c) 2021 Martin Butt
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -34,11 +35,11 @@
 
 declare(strict_types=1);
 
-namespace CryptoTech\Laravel\Adsense\Providers;
+namespace MartinButt\Laravel\Adsense\Providers;
 
-use CryptoTech\Laravel\Adsense\AdsenseBuilder;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Lumen\Application as LumenApplication;
+use MartinButt\Laravel\Adsense\AdsenseBuilder;
 
 /**
  * Class AdsenseServiceProvider.
@@ -59,7 +60,7 @@ class AdsenseServiceProvider extends ServiceProvider
         } else {
             // Publishing the configuration file.
             $this->publishes([
-                $this->getConfigFile() => config_path('adsense-ads.php'),
+                $this->getConfigFile() => config_path('adsense.php'),
             ], 'config');
             // Publishing the views.
             $this->publishes([
@@ -101,6 +102,6 @@ class AdsenseServiceProvider extends ServiceProvider
      */
     protected function getConfigFile(): string
     {
-        return __DIR__.'/../resources/config/adsense-ads.php';
+        return __DIR__.'/../resources/config/adsense.php';
     }
 }

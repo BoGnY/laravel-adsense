@@ -6,13 +6,15 @@
  * Package for easily including Google Adsense Ad units
  * in Laravel and Lumen.
  *
- * @developer Crypto Technology srl <https://cryptotech.srl/>
+ * @developer Martin Butt <https://www.martinbutt.com/>
  *
- * @copyright Copyright (c) 2019 Crypto Technology srl
+ * @copyright Copyright (c) 2021 Martin Butt
  * @license   MIT
  *
  * Copyright (c) 2016 Galen Han
  * Copyright (c) 2019 Crypto Technology srl
+ * Copyright (c) 2021 Martin Butt
+ *
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -34,7 +36,7 @@
 
 declare(strict_types=1);
 
-namespace CryptoTech\Laravel\Adsense;
+namespace MartinButt\Laravel\Adsense;
 
 class AdsenseBuilder
 {
@@ -43,13 +45,14 @@ class AdsenseBuilder
         return view('adsense::ads')->with([
             'ad_client' => config('adsense.client_id'),
             'ad_style' => config("adsense.ads.$unit.ad_style", 'display:block;'),
-            'ad_slot' => config("adsense.ads.$unit.ad_unit_id"),
-            'ad_format' => config("adsense.ads.$unit.ad_format", null),
+            'ad_slot' => config("adsense.ads.$unit.ad_slot"),
+            'ad_format' => config("adsense.ads.$unit.ad_format"),
+            'ad_full_width_responsive' => config("adsense.ads.$unit.ad_full_width_responsive"),
         ]);
     }
 
     public function javascript()
     {
-        return view('adsense::javascript');
+        return view('adsense::javascript', ['client_id' => config('adsense.client_id')]);
     }
 }

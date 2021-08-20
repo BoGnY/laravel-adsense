@@ -23,7 +23,6 @@ enabled:
   - unalign_double_arrow
 
 disabled:
-  - phpdoc_to_comment
   - phpdoc_var_without_name
 
 finder:

@@ -6,13 +6,14 @@
  * Package for easily including Google Adsense Ad units
  * in Laravel and Lumen.
  *
- * @developer Crypto Technology srl <https://cryptotech.srl/>
+ * @developer Martin Butt <https://www.martinbutt.com/>
  *
- * @copyright Copyright (c) 2019 Crypto Technology srl
+ * @copyright Copyright (c) 2021 Martin Butt
  * @license   MIT
  *
  * Copyright (c) 2016 Galen Han
  * Copyright (c) 2019 Crypto Technology srl
+ * Copyright (c) 2021 Martin Butt
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -38,12 +39,16 @@ return [
     'client_id' => 'YOUR_CLIENT_ID', //Your Adsense client ID e.g. ca-pub-9508939161510421
     'ads' => [
         'responsive' => [
-            'ad_unit_id' => 1234567890,
-            'ad_format' => 'auto',
+            'ad_slot' => 1111111111,
+            'ad_format' => 'fluid',
+            'ad_full_width_responsive' => true,
+            'ad_style' => 'display:inline-block',
         ],
         'rectangle' => [
-            'ad_unit_id' => 1234567890,
+            'ad_slot' => 2222222222,
             'ad_style' => 'display:inline-block;width:300px;height:250px',
+            'ad_full_width_responsive' => false,
+            'ad_format' => 'auto',
         ],
     ],
 ];

@@ -6,13 +6,14 @@
  * Package for easily including Google Adsense Ad units
  * in Laravel and Lumen.
  *
- * @developer Crypto Technology srl <https://cryptotech.srl/>
+ * @developer Martin Butt <https://www.martinbutt.com/>
  *
- * @copyright Copyright (c) 2019 Crypto Technology srl
+ * @copyright Copyright (c) 2021 Martin Butt
  * @license   MIT
  *
  * Copyright (c) 2016 Galen Han
  * Copyright (c) 2019 Crypto Technology srl
+ * Copyright (c) 2021 Martin Butt
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -34,9 +35,9 @@
 
 declare(strict_types=1);
 
-namespace CryptoTech\Laravel\Adsense\Tests;
+namespace MartinButt\Laravel\Adsense\Tests;
 
-use CryptoTech\Laravel\Adsense\Facades\AdsenseFacade;
+use MartinButt\Laravel\Adsense\Facades\AdsenseFacade;
 use Illuminate\View\View;
 
 /**
@@ -44,7 +45,7 @@ use Illuminate\View\View;
  */
 class AdsenseTest extends TestCase
 {
-    /** @var \CryptoTech\Laravel\Adsense\AdsenseBuilder $adsense */
+    /** @var \MartinButt\Laravel\Adsense\AdsenseBuilder $adsense */
     protected $adsense;
 
     public function setUp(): void
@@ -61,7 +62,7 @@ class AdsenseTest extends TestCase
     public function testAdsenseView()
     {
         $return = $this->app->view->make('adsense::javascript')->render();
-        $this->assertSame("<script async src=\"//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js\"></script>\n<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>\n", $return);
+        $this->assertSame('<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-123" crossorigin="anonymous"></script>', $return);
     }
 
     public function testAdsenseFacade()

@@ -1,4 +1,4 @@
-# Google Adsense Ads for Laravel 6.0+
+# Google Adsense Ads for Laravel 6.x, 7.x and 8.x
 
 [![Latest Version][ico-version]][link-packagist]
 [![Total Downloads][ico-downloads]][link-downloads]
@@ -8,7 +8,7 @@
 [![Code Coverage][ico-coverage]][link-coverage]
 [![License][ico-license]][link-license]
 
-Package for easily including Google Adsense Ad units in [Laravel 6.0+][link-laravel] and [Lumen][link-lumen]. For use it with Laravel 5.x use original [Mastergalen/Adsense-Ads package][link-mastergalen-adsense].
+Package for easily including Google Adsense Ad units in [Laravel 6.x, 7.x and 8.x][link-laravel] and [Lumen][link-lumen]. For use with Laravel 5.x use original [Mastergalen/Adsense-Ads package][link-mastergalen-adsense].
 
 ## Installation
 
@@ -19,28 +19,29 @@ In your project root run
 The first step is using [Composer][link-composer] to install the package and automatically update your `composer.json` file, you can do this by running:
 
 ```shell
-composer require crypto-technology/laravel-adsense
+composer require martinbutt/laravel-adsense
 ```
-
-> **Note**: If you are using Laravel 5.5+, the steps 3 and 4, for providers and aliases, are unnecessaries. Google Adsense Ads supports Laravel new [Package Discovery](https://laravel.com/docs/5.5/packages#package-discovery).
 
 ### 2 - Set up config file
 
-Run `php artisan config:publish crypto-technology/laravel-adsense`.
+Run `php artisan config:publish martinbutt/laravel-adsense`.
 
-Edit the generated config file in `/config/adsense-ads.php` to add your ad units
+Edit the generated config file in `/config/adsense.php` to add your ad units
 
 ```php
 return [
     'client_id' => 'YOUR_CLIENT_ID', //Your Adsense client ID e.g. ca-pub-9508939161510421
     'ads' => [
         'responsive' => [
-            'ad_unit_id' => 12345678901,
-            'ad_format' => 'auto'
+            'ad_slot' => 1111111111,
+            'ad_format' => 'fluid',
+            'ad_full_width_responsive' => true,
+            'ad_style' => 'display:inline-block'
         ],
         'rectangle' => [
-            'ad_unit_id' => 1234567890,
+            'ad_slot' => 2222222222,
             'ad_style' => 'display:inline-block;width:300px;height:250px',
+            'ad_full_width_responsive' => false,
             'ad_format' => 'auto'
         ]
     ]
@@ -59,7 +60,7 @@ You need to update your application configuration in order to register the packa
 return [
     // ...
     'providers' => [
-        CryptoTech\Laravel\Adsense\Providers\AdsenseServiceProvider::class,
+        MartinButt\Laravel\Adsense\Providers\AdsenseServiceProvider::class,
         // ...
     ],
     // ...
@@ -80,7 +81,7 @@ $app = new Laravel\Lumen\Application(
 
 // ...
 
-$app->register(CryptoTech\Laravel\Adsense\Providers\AdsenseServiceProvider::class);
+$app->register(MartinButt\Laravel\Adsense\Providers\AdsenseServiceProvider::class);
 
 // ...
 
@@ -93,7 +94,7 @@ return $app;
 
 You may get access to the Google Adsense Ads services using following facades:
 
-- `CryptoTech\Laravel\Adsense\Facades\AdsenseFacade`
+- `MartinButt\Laravel\Adsense\Facades\AdsenseFacade`
 
 You can setup a short-version aliases for these facades in your `config/app.php` file. For example:
 
@@ -103,7 +104,7 @@ You can setup a short-version aliases for these facades in your `config/app.php`
 return [
     // ...
     'aliases' => [
-        'Adsense' => CryptoTech\Laravel\Adsense\Facades\AdsenseFacade::class,
+        'Adsense' => MartinButt\Laravel\Adsense\Facades\AdsenseFacade::class,
         // ...
     ],
     // ...
@@ -123,12 +124,12 @@ php artisan vendor:publish
 or
 
 ```shell
-php artisan vendor:publish --provider="CryptoTech\Laravel\Adsense\Providers\AdsenseServiceProvider"
+php artisan vendor:publish --provider="MartinButt\Laravel\Adsense\Providers\AdsenseServiceProvider"
 ```
 
-> Lumen does not support this command, for it you should copy the file `src/resources/config/adsense-ads.php` to `config/adsense-ads.php` of your project.
+> Lumen does not support this command, for it you should copy the file `src/resources/config/adsense.php` to `config/adsense.php` of your project.
 
-In `adsense-ads.php` configuration file you can determine the properties of the default values and some behaviors.
+In `adsense.php` configuration file you can determine the properties of the default values and some behaviors.
 
 ## Usage
 Add `{!! Adsense::javascript() !!}` in your `<head>` tag.
@@ -141,14 +142,11 @@ Use `{!! Adsense::ads('ads_unit') !!}` every time you want to show an ad.
 
 Please see the [CHANGELOG.md][link-changelog] file for more information on what has changed recently.
 
-## Security
-
-If you discover any security related issues, please email security@cryptotech.srl instead of using the issue tracker.
-
 ## Credits
 
-- [Crypto Technology srl][link-author]
-- [Luca Bognolo][link-coauthor]
+- [Martin Butt][link-author]
+- [Crypto Technology srl][link-coauthor1]
+- [Luca Bognolo][link-coauthor2]
 - [All Contributors][link-contributors]
 
 ## License
@@ -156,27 +154,28 @@ If you discover any security related issues, please email security@cryptotech.sr
 The Google Adsense Ads is open-sourced software licensed under the [MIT license][link-mit-license].  
 Please see the [LICENSE.md][link-license] file for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/crypto-technology/laravel-adsense.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/crypto-technology/laravel-adsense.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/crypto-technology/laravel-adsense/master.svg?style=flat-square
-[ico-styleci]: https://styleci.io/repos/211677362/shield?style=flat-square
-[ico-scrutinizer]: https://scrutinizer-ci.com/g/crypto-technology/cryptocurrency/badges/quality-score.png?b=master
-[ico-coverage]: https://scrutinizer-ci.com/g/crypto-technology/laravel-adsense/badges/coverage.png
-[ico-license]: https://img.shields.io/packagist/l/crypto-technology/laravel-adsense?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/martinbutt/laravel-adsense.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/martinbutt/laravel-adsense.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/martinbutt/laravel-adsense/master.svg?style=flat-square
+[ico-styleci]: https://styleci.io/repos/359045604/shield?style=flat-square
+[ico-scrutinizer]: https://scrutinizer-ci.com/g/martinbutt/laravel-adsense/badges/quality-score.png?b=master
+[ico-coverage]: https://scrutinizer-ci.com/g/martinbutt/laravel-adsense/badges/coverage.png
+[ico-license]: https://img.shields.io/packagist/l/martinbutt/laravel-adsense?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/crypto-technology/laravel-adsense
-[link-downloads]: https://packagist.org/packages/crypto-technology/laravel-adsense
-[link-travis]: https://travis-ci.org/crypto-technology/laravel-adsense
-[link-styleci]: https://styleci.io/repos/211677362
-[link-scrutinizer]: https://scrutinizer-ci.com/g/crypto-technology/cryptocurrency/?branch=master
-[link-coverage]: https://scrutinizer-ci.com/g/crypto-technology/laravel-adsense
+[link-packagist]: https://packagist.org/packages/martinbutt/laravel-adsense
+[link-downloads]: https://packagist.org/packages/martinbutt/laravel-adsense
+[link-travis]: https://travis-ci.com/martinbutt/laravel-adsense
+[link-styleci]: https://styleci.io/repos/359045604
+[link-scrutinizer]: https://scrutinizer-ci.com/g/martinbutt/laravel-adsense/?branch=master
+[link-coverage]: https://scrutinizer-ci.com/g/martinbutt/laravel-adsense
 [link-laravel]: https://laravel.com
 [link-lumen]: https://lumen.laravel.com
 [link-mastergalen-adsense]: https://github.com/Mastergalen/Adsense-Ads
 [link-composer]: https://getcomposer.org
 [link-license]: LICENSE.md
 [link-changelog]: CHANGELOG.md
-[link-author]: https://cryptotech.srl
-[link-coauthor]: https://bogny.eu
+[link-author]: https://www.martinbutt.com
+[link-coauthor1]: https://cryptotech.srl
+[link-coauthor2]: https://bogny.eu
 [link-contributors]: ../../contributors
 [link-mit-license]: https://opensource.org/licenses/MIT

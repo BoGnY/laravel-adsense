@@ -1,10 +1,21 @@
-<!-- Mods Center Responsive -->
 <ins class="adsbygoogle"
-    style="{!! $ad_style !!}"
-    data-ad-client="{!! $ad_client !!}"
-    data-ad-slot="{!! $ad_slot !!}"
-    @if(isset($ad_format))
-    data-ad-format="{!! $ad_format !!}"
+     @if(isset($ad_style))
+     style="{!! $ad_style !!}"
+     @endif
+     @if(isset($ad_client))
+     data-ad-client="{!! $ad_client !!}"
+     @endif
+     @if(isset($ad_slot))
+     data-ad-slot="{!! $ad_slot !!}"
+     @endif
+     @if(isset($ad_format))
+     data-ad-format="{!! $ad_format !!}"
+     @endif
+     @if(isset($ad_full_width_responsive))
+     data-full-width-responsive="{!! $ad_full_width_responsive !!}"
     @endif
-    >
+>
 </ins>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>

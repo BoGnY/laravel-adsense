@@ -4,6 +4,7 @@ language: php
 env:
   global:
     - SETUP=stable
+    - XDEBUG_MODE=coverage
 
 matrix:
   fast_finish: true
@@ -17,6 +18,9 @@ matrix:
     - php: 7.4
     - php: 7.4
       env: SETUP=lowest
+    - php: 8.0
+    - php: 8.0
+      env: SETUP=lowest
 
 cache:
   directories:
@@ -29,6 +33,7 @@ install:
   - if [[ $SETUP = 'lowest' ]]; then travis_retry composer update --prefer-dist --no-interaction --prefer-lowest --prefer-stable --no-suggest; fi
 
 script:
+  -
   - vendor/bin/phpunit --configuration phpunit.xml
 
 after_script:
